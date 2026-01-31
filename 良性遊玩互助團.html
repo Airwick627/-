@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>良性遊玩互助團 - 討論區</title>
+    <style>
+        /* 全局样式重置与科幻基础风格 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft JhengHei', 'Roboto', 'Arial', sans-serif;
+            /* 科幻风格文字发光效果基础 */
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+        }
+
+        /* 科幻渐变背景 */
+        body {
+            background: linear-gradient(135deg, #0a0a1a, #12122b, #0f0f29);
+            color: #e0f7ff;
+            line-height: 1.8;
+            padding-bottom: 50px;
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        /* 网格背景装饰 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 200, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 200, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* 霓虹发光效果 */
+        .neon-glow {
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 
+                        0 0 20px rgba(0, 255, 255, 0.3),
+                        inset 0 0 10px rgba(0, 255, 255, 0.2);
+        }
+
+        /* 團長提示彈窗 - 科幻风格 */
+        .leader-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 10, 30, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #1a1a3a, #222244);
+            border: 1px solid #00ffff;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            max-width: 500px;
+            /* 修复：将 neon-glow: true 改为 class 调用 */
+            class: "neon-glow";
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 弹窗装饰光效 */
+        .modal-content::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #00ffff, #ff00ff, #00ffff);
+            animation: glowSlide 3s linear infinite;
+        }
+
+        @keyframes glowSlide {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .modal-content h2 {
+            color: #00ffff;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .modal-content p {
+            color: #b3e5fc;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .modal-btn {
+            background: linear-gradient(45deg, #0088cc, #00ffff);
+            color: #0a0a1a;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+        }
+
+        /* 頂部導航欄 - 科幻悬浮风格 */
+        header {
+            background: rgba(10, 10, 40, 0.8);
+            backdrop-filter: blur(10px);
+            color: #00ffff;
+            padding: 25px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.8;
+            color: #80deea;
+        }
+
+        /* 導航菜單 - 科幻胶囊样式 */
+        nav {
+            background: rgba(15, 15, 50, 0.7);
+            backdrop-filter: blur(8px);
+            padding: 15px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        nav a {
+            color: #80deea;
+            margin: 0 18px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 50px;
+        }
+
+        nav a:hover {
+            color: #0a0a1a;
+            background: #00ffff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+        }
+
+        /* 主容器 - 科幻卡片容器 */
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* 卡片樣式 - 科幻玻璃拟态风格 */
+        .card {
+            background: rgba(18, 18, 45, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 10, 30, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 10, 30, 0.6);
+            border-color: rgba(0, 255, 255, 0.4);
+        }
+
+        .card h2 {
+            color: #00ffff;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+        }
+
+        /* 帖子作者信息 */
+        .post-author {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .author-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-right: 20px;
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            background: linear-gradient(45deg, #1a1a3a, #0088cc);
+        }
+
+        .author-info h3 {
+            color: #00ffff;
+            font-size: 1.3rem;
+        }
+
+        .author-info p {
+            color: #80deea;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* 帖子數據（瀏覽/點贊） */
+        .post-data {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 25px;
+            color: #80deea;
+        }
+
+        .post-data .item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+
+        /* 打字效果容器 - 科幻终端风格 */
+        .typewriter-container {
+            position: relative;
+            min-height: 80px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(0, 10, 30, 0.4);
+            border-left: 3px solid #00ffff;
+        }
+
+        .typewriter-text {
+            white-space: pre-line;
+            color: #b3e5fc;
+        }
+
+        /* 回帖區域 - 默认隐藏所有评论，通过JS动态显示 */
+        .comment-item {
+            background: rgba(20, 20, 50, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 255, 255, 0.15);
+            display: none; /* 默认隐藏 */
+            transition: all 0.3s ease;
+        }
+
+        /* 显示时的动画效果 */
+        .comment-item.show {
+            display: block;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .comment-item:hover {
+            border-color: rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+        }
+
+        .comment-author {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .comment-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 2px solid #0088cc;
+            box-shadow: 0 0 10px rgba(0, 136, 204, 0.4);
+            background: linear-gradient(45deg, #1a1a3a, #006699);
+        }
+
+        .comment-author h4 {
+            color: #00ffff;
+            font-size: 1.1rem;
+        }
+
+        /* 成員展示（僅3人：阿麒+同學1+同學2） */
+        .members {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .member {
+            width: 120px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .member:hover {
+            transform: scale(1.05);
+        }
+
+        .member img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #1a1a3a, #0088cc);
+        }
+
+        .member p {
+            color: #b3e5fc;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .member .role {
+            font-size: 0.8rem;
+            color: #00ffff;
+            opacity: 0.8;
+        }
+
+        /* 公會宣言區域 */
+        .manifesto-container {
+            position: relative;
+            min-height: 180px;
+            font-size: 1.2rem;
+            line-height: 2.2;
+            font-weight: 500;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(0, 10, 30, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        /* 按鈕樣式 - 科幻渐变按钮 */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #0088cc, #00ffff);
+            color: #0a0a1a;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+            background: linear-gradient(45deg, #00ffff, #0088cc);
+        }
+
+        /* 公告列表样式 */
+        ul {
+            padding-left: 25px;
+            color: #b3e5fc;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        ul li::before {
+            content: '>';
+            color: #00ffff;
+            position: absolute;
+            left: -20px;
+        }
+
+        /* 新增：提示按键的样式 */
+        .key-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(10, 10, 40, 0.8);
+            border: 1px solid #00ffff;
+            border-radius: 10px;
+            padding: 10px 15px;
+            color: #b3e5fc;
+            font-size: 0.9rem;
+            z-index: 999;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        /* 新增：版權區域样式 */
+        .copyright {
+            background: #00dddd; 
+            color: #0a0a1a;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 1rem;
+            margin-top: 20px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- 團長提示彈窗 -->
+    <div class="leader-modal" id="leaderModal">
+        <div class="modal-content neon-glow">
+            <h2>恭喜你！</h2>
+            <p>本公會目前無其他成員，你已自動晉升為「良性遊玩互助團」團長！</p>
+            <button class="modal-btn" id="modalConfirmBtn">確認</button>
+        </div>
+    </div>
+
+    <!-- 頂部標題+導航 -->
+    <header>
+        <h1>良性遊玩互助團</h1>
+        <p>善用網絡，珍惜身邊，互助同行</p>
+    </header>
+    <nav>
+        <a href="#notice">公會公告</a>
+        <a href="#member">公會成員</a>
+        <a href="#post">核心帖子</a>
+        <a href="#manifesto">公會宣言</a>
+        <a href="#join">申請加入</a>
+    </nav>
+
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 公會公告 -->
+        <section class="card" id="notice">
+            <h2>公會公告</h2>
+            <ul style="padding-left: 25px; line-height: 1.8;">
+                <li>本公會主打「理性玩網絡，珍惜身邊人」，禁止沉迷/惡意行為</li>
+                <li>成員可自由分享網絡使用心得，互相幫助解決人際關係問題</li>
+                <li>每日可交流心得，禁止攻擊、謾罵其他成員</li>
+            </ul>
+        </section>
+
+        <!-- 公會成員 -->
+        <section class="card" id="member">
+            <h2>公會成員</h2>
+            <p style="margin-bottom: 15px; color: #80deea;">當前公會人數：3人 | 團長：阿麒</p>
+            <div class="members">
+                <div class="member">
+                    <img src="https://img2.woyaogexing.com/2020/02/25/1d5f64c3b76c4e02bce7e35fd6bac51c!400x400.jpeg" alt="阿麒頭像">
+                    <p>阿麒</p>
+                    <p class="role">團長</p>
+                </div>
+                <div class="member">
+                    <img src="https://img2.woyaogexing.com/2020/02/25/08c91bf78a4c45758b2565e7cc7807b5!400x400.jpeg" alt="同學1頭像">
+                    <p>同學1</p>
+                    <p class="role">成員</p>
+                </div>
+                <div class="member">
+                    <img src="https://img2.woyaogexing.com/2020/02/25/015c2c7d4c4d4afc8e72e5adb4ae973f!400x400.jpeg" alt="同學2頭像">
+                    <p>同學2</p>
+                    <p class="role">成員</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 核心帖子（按新对话顺序） -->
+        <section class="card" id="post">
+            <h2>核心帖子</h2>
+            <div class="post-author">
+                <img src="https://img2.woyaogexing.com/2020/02/25/1d5f64c3b76c4e02bce7e35fd6bac51c!400x400.jpeg" alt="阿麒頭像" class="author-avatar">
+                <div class="author-info">
+                    <h3>阿麒（團長）</h3>
+                    <p>發帖時間：2026-02-13 10:45</p>
+                </div>
+            </div>
+
+            <!-- 帖子數據 -->
+            <div class="post-data">
+                <div class="item">
+                    <span>👁️</span>
+                    <span id="viewCount">1</span>
+                    <span>瀏覽</span>
+                </div>
+                <div class="item">
+                    <span>👍</span>
+                    <span id="likeCount">0</span>
+                    <span>點贊</span>
+                </div>
+            </div>
+
+            <!-- 阿麒首發帖（打字效果） -->
+            <div class="typewriter-container">
+                <div class="typewriter-text" id="mainPostText"></div>
+            </div>
+
+            <!-- 回帖區域 -->
+            <div style="margin-top: 30px;">
+                <h3 style="color: #00ffff; margin-bottom: 20px; font-size: 1.3rem; letter-spacing: 1px;">回帖討論</h3>
+                
+                <!-- 同學1第一次回帖 -->
+                <div class="comment-item" id="comment1">
+                    <div class="comment-author">
+                        <img src="https://img2.woyaogexing.com/2020/02/25/08c91bf78a4c45758b2565e7cc7807b5!400x400.jpeg" alt="同學1頭像" class="comment-avatar">
+                        <h4>同學1</h4>
+                    </div>
+                    <div class="typewriter-container">
+                        <div class="typewriter-text" id="comment1Text"></div>
+                    </div>
+                </div>
+
+                <!-- 阿麒第一次回覆同學1 -->
+                <div class="comment-item" id="reply1_1">
+                    <div class="comment-author">
+                        <img src="https://img2.woyaogexing.com/2020/02/25/1d5f64c3b76c4e02bce7e35fd6bac51c!400x400.jpeg" alt="阿麒頭像" class="comment-avatar">
+                        <h4>阿麒（團長）</h4>
+                    </div>
+                    <div class="typewriter-container">
+                        <div class="typewriter-text" id="reply1_1Text"></div>
+                    </div>
+                </div>
+
+                <!-- 同學1第二次回帖（真係得咩？） -->
+                <div class="comment-item" id="comment1_2">
+                    <div class="comment-author">
+                        <img src="https://img2.woyaogexing.com/2020/02/25/08c91bf78a4c45758b2565e7cc7807b5!400x400.jpeg" alt="同學1頭像" class="comment-avatar">
+                        <h4>同學1</h4>
+                    </div>
+                    <div class="typewriter-container">
+                        <div class="typewriter-text" id="comment1_2Text"></div>
+                    </div>
+                </div>
+
+                <!-- 阿麒第二次回覆同學1 -->
+                <div class="comment-item" id="reply1_2">
+                    <div class="comment-author">
+                        <img src="https://img2.woyaogexing.com/2020/02/25/1d5f64c3b76c4e02bce7e35fd6bac51c!400x400.jpeg" alt="阿麒頭像" class="comment-avatar">
+                        <h4>阿麒（團長）</h4>
+                    </div>
+                    <div class="typewriter-container">
+                        <div class="typewriter-text" id="reply1_2Text"></div>
+                    </div>
+                </div>
+
+                <!-- 同學2回帖 -->
+                <div class="comment-item" id="comment2">
+                    <div class="comment-author">
+                        <img src="https://img2.woyaogexing.com/2020/02/25/015c2c7d4c4d4afc8e72e5adb4ae973f!400x400.jpeg" alt="同學2頭像" class="comment-avatar">
+                        <h4>同學2</h4>
+                    </div>
+                    <div class="typewriter-container">
+                        <div class="typewriter-text" id="comment2Text"></div>
+                    </div>
+                </div>
+
+                <!-- 阿麒第一次回覆同學2（前半段） -->
+                <div class="comment-item" id="reply2_1">
+                    <div class="comment-author">
+                        <img src="https://img2.woyaogexing.com/2020/02/25/1d5f64c3b76c4e02bce7e35fd6bac51c!400x400.jpeg" alt="阿麒頭像" class="comment-avatar">
+                        <h4>阿麒（團長）</h4>
+                    </div>
+                    <div class="typewriter-container">
+                        <div class="typewriter-text" id="reply2_1Text"></div>
+                    </div>
+                </div>
+                
+                <!-- 新增：阿麒第一次回覆同學2（後半段）- 单独步骤 -->
+                <div id="reply2_1_continue" style="display:none;"></div>
+
+                <!-- 阿麒第二次回覆同學2（後半段） -->
+                <div class="comment-item" id="reply2_2">
+                    <div class="comment-author">
+                        <img src="https://img2.woyaogexing.com/2020/02/25/1d5f64c3b76c4e02bce7e35fd6bac51c!400x400.jpeg" alt="阿麒頭像" class="comment-avatar">
+                        <h4>阿麒（團長）</h4>
+                    </div>
+                    <div class="typewriter-container">
+                        <div class="typewriter-text" id="reply2_2Text"></div>
+                    </div>
+                </div>
+
+                <!-- 同學2第二次回帖 -->
+                <div class="comment-item" id="comment2_2">
+                    <div class="comment-author">
+                        <img src="https://img2.woyaogexing.com/2020/02/25/015c2c7d4c4d4afc8e72e5adb4ae973f!400x400.jpeg" alt="同學2頭像" class="comment-avatar">
+                        <h4>同學2</h4>
+                    </div>
+                    <div class="typewriter-container">
+                        <div class="typewriter-text" id="comment2_2Text"></div>
+                    </div>
+                </div>
+
+                <!-- 阿麒第三次回覆同學2 -->
+                <div class="comment-item" id="reply2_3">
+                    <div class="comment-author">
+                        <img src="https://img2.woyaogexing.com/2020/02/25/1d5f64c3b76c4e02bce7e35fd6bac51c!400x400.jpeg" alt="阿麒頭像" class="comment-avatar">
+                        <h4>阿麒（團長）</h4>
+                    </div>
+                    <div class="typewriter-container">
+                        <div class="typewriter-text" id="reply2_3Text"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 公會宣言 -->
+        <section class="card" id="manifesto">
+            <h2>公會宣言</h2>
+            <div class="manifesto-container typewriter-container">
+                <div class="typewriter-text" id="manifestoText"></div>
+            </div>
+            <p style="margin-top: 15px; color: #80deea; font-style: italic;">（最終版本）</p>
+        </section>
+
+        <!-- 申請加入 -->
+        <section class="card" id="join">
+            <h2>申請加入公會</h2>
+            <p style="margin-bottom: 10px; color: #b3e5fc;">申請條件：願意理性使用網絡，珍惜家人朋友關係</p>
+            <p style="margin-bottom: 15px; color: #b3e5fc;">申請方式：留言分享你的網絡使用心得，團長審核後通過</p>
+            <a href="#" class="btn">立即申請加入</a>
+        </section>
+    </div>
+
+    <!-- 新增：版權區域 -->
+    <div class="copyright">
+        良性遊玩互助團 © 2026版權所有 | 高三丙 方樹澧  高三乙 林君濠 | 部落聯繫：2831 5484
+    </div>
+
+    <!-- 按键提示 - 改为繁体 -->
+    <div class="key-hint">
+        🎹 按 <strong>→</strong> 推進對話 | 長按→ 快速顯示全部
+    </div>
+
+    <script>
+        // 全局變量：是否快進（长按右箭頭觸發）
+        let isFastForward = false;
+        let fastForwardTimer = null;
+        // 打字速度调整为100毫秒/字
+        const typeSpeed = 100;
+        // 快進模式下直接跳過所有延遲
+        const getCurrentSpeed = () => isFastForward ? 0 : typeSpeed;
+        
+        // 公会宣言相关状态
+        let manifestoStep = 0; // 0:未开始 1:旧版打字完成 2:删除完成 3:新版打字完成
+        // 宣言旧版本
+        const manifestoTextOld = "無論你係新手定係老手，遇到難關或者有唔開心嘅事，都可以喺度傾吓。有興趣嘅朋友，歡迎申請加入，我哋一齊建立一個真正好玩嘅地方。多謝。";
+        // 宣言新版本
+        const manifestoTextNew = "網絡用得正確，就可以是傳遞真理、愛德、生命、家庭同義德的地方!我們期待跟你一起善用網絡，尋找真理、實踐愛德、尊重生命、珍惜家庭、活出義德。";
+
+        // 步骤管理：当前步骤索引
+        let currentStep = 0;
+        // 定义所有步骤的执行函数
+        const steps = [];
+
+        // 显示评论的辅助函数
+        function showComment(commentId) {
+            const comment = document.getElementById(commentId);
+            if (comment) {
+                comment.classList.add('show');
+                // 显示后自动滚动到该评论
+                comment.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        // 1. 團長彈窗邏輯
+        const leaderModal = document.getElementById('leaderModal');
+        const modalConfirmBtn = document.getElementById('modalConfirmBtn');
+        modalConfirmBtn.addEventListener('click', () => {
+            leaderModal.style.display = 'none';
+            // 彈窗關閉後，初始化步骤和动画
+            initSteps();
+            initDataCounter();
+            // 执行第一步：阿麒首发帖
+            executeCurrentStep();
+        });
+
+        // 2. 方向鍵邏輯 - 改为手动推进步骤
+        document.addEventListener('keydown', (e) => {
+            // 右方向键：推进步骤
+            if (e.key === 'ArrowRight') {
+                // 长按右箭头超过500ms触发快进
+                if (!fastForwardTimer) {
+                    fastForwardTimer = setTimeout(() => {
+                        isFastForward = true;
+                        // 快进时显示所有评论
+                        document.querySelectorAll('.comment-item').forEach(item => {
+                            item.classList.add('show');
+                        });
+                        // 快进时直接显示完整的公会宣言
+                        document.getElementById('manifestoText').textContent = manifestoTextNew;
+                        manifestoStep = 3;
+                        // 直接显示所有文本
+                        const texts = getTexts();
+                        document.getElementById('mainPostText').textContent = texts.mainPost;
+                        document.getElementById('comment1Text').textContent = texts.comment1;
+                        document.getElementById('reply1_1Text').textContent = texts.reply1_1;
+                        document.getElementById('comment1_2Text').textContent = texts.comment1_2;
+                        document.getElementById('reply1_2Text').textContent = texts.reply1_2;
+                        document.getElementById('comment2Text').textContent = texts.comment2;
+                        document.getElementById('reply2_1Text').textContent = texts.reply2_1_full;
+                        document.getElementById('reply2_2Text').textContent = texts.reply2_2;
+                        document.getElementById('comment2_2Text').textContent = texts.comment2_2;
+                        document.getElementById('reply2_3Text').textContent = texts.reply2_3;
+                        // 直接设置到最后一步
+                        currentStep = steps.length;
+                    }, 500);
+                }
+                
+                // 如果不是快进模式，执行下一步
+                if (!isFastForward) {
+                    executeCurrentStep();
+                }
+            }
+        });
+
+        // 松开右方向键时取消快进计时器
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'ArrowRight') {
+                clearTimeout(fastForwardTimer);
+                fastForwardTimer = null;
+            }
+        });
+
+        // 3. 打字效果函數
+        function typeWriter(element, text, callback = () => {}) {
+            let index = 0;
+            // 如果是续打，保留已有内容
+            if (element.textContent.length > 0 && text.startsWith(element.textContent)) {
+                index = element.textContent.length;
+            } else {
+                element.textContent = '';
+            }
+            
+            // 清除之前的定時器，防止衝突
+            clearInterval(element.typeTimer);
+            
+            element.typeTimer = setInterval(() => {
+                if (index < text.length && !isFastForward) {
+                    element.textContent += text.charAt(index);
+                    index++;
+                } else if (isFastForward) {
+                    element.textContent = text;
+                    clearInterval(element.typeTimer);
+                    callback();
+                } else {
+                    clearInterval(element.typeTimer);
+                    callback();
+                }
+            }, getCurrentSpeed());
+        }
+
+        // 4. 刪除效果函數
+        function deleteWriter(element, callback = () => {}) {
+            let text = element.textContent;
+            
+            const timer = setInterval(() => {
+                if (text.length > 0 && !isFastForward) {
+                    text = text.slice(0, -1);
+                    element.textContent = text;
+                } else if (isFastForward) {
+                    element.textContent = '';
+                    clearInterval(timer);
+                    callback();
+                } else {
+                    clearInterval(timer);
+                    callback();
+                }
+            }, getCurrentSpeed() / 2);
+        }
+
+        // 5. 瀏覽量/點贊數上升效果
+        function initDataCounter() {
+            const viewCount = document.getElementById('viewCount');
+            const likeCount = document.getElementById('likeCount');
+            let currentViews = 1;
+            let currentLikes = 0;
+
+            setInterval(() => {
+                if (!isFastForward) {
+                    const addViews = Math.floor(Math.random() * 3) + 1;
+                    currentViews += addViews;
+                    viewCount.textContent = currentViews;
+                } else {
+                    viewCount.textContent = 286;
+                    likeCount.textContent = 59;
+                }
+            }, 2000);
+
+            setInterval(() => {
+                if (!isFastForward) {
+                    const addLikes = Math.floor(Math.random() * 2);
+                    currentLikes += addLikes;
+                    likeCount.textContent = currentLikes;
+                }
+            }, 5000);
+        }
+
+        // 获取文本内容
+        function getTexts() {
+            return {
+                mainPost: "大家好，我係新成員阿麒。我前幾排因為沉迷網絡，破壞哂同朋友、家人嘅關係，成績都一塌糊塗……但係而家我明白咗，網絡佢其實只係工具，真正重要嘅係我哋點樣善用網絡。",
+                comment1: "我同你情況好似。我阿媽成日話我打機打到成個廢人咁，我唔知點同佢溝通……我連解釋嘅機會都冇。",
+                reply1_1: "我有個朋友時不時都會搵埋佢爸爸一齊出街玩，同食飯，不如你都試吓邀請你阿媽一齊去做吓啲除咗打機之外嘅嘢？，或者同佢分享吓你玩緊嘅遊戲。有時家長唔明，係因為我哋冇俾機會佢哋了解我哋。主動同家人溝通，佢哋就會了解你多啲。",
+                comment1_2: "真係得咩？",
+                reply1_2: "我都曾經覺得網絡世界就係一切。但係，真實嘅生活同陪伴係無可替代㗎。試吓將打機嘅時間分一部分出嚟，去了解身邊嘅家人同朋友。遊戲可以係放鬆，但唔應該成為逃避現實嘅工具。",
+                comment2: "我之前成日上網睇短片，見到人哋做咩我就做咩，之後我的朋友就同我反晒面。我唔知點算好，明明見網上Ｄ人玩得咁開心，都唔明點解佢哋要同我反面囉！",
+                // 拆分前半段和后半段
+                reply2_1_part1: "我好明白你嘅感受。網絡短片的確好吸引人，好似人人都玩得好開心，好容易令人覺得「跟住做就係啱嘅！」",
+                reply2_1_part2: "但係每當呢個時候，我哋就需要學習分辨 「真理」 同 「義德」。唔係「多人做嘅嘢」就係「真理」，就係啱嘅，反而係我哋要問自己，呢個行為係咪真係適合我哋而家嘅環境？咁做嘅話，會唔會傷害到人哋嘅感受、尊嚴，或者破壞彼此嘅關係？",
+                // 完整内容
+                reply2_1_full: "我好明白你嘅感受。網絡短片的確好吸引人，好似人人都玩得好開心，好容易令人覺得「跟住做就係啱嘅！」但係每當呢個時候，我哋就需要學習分辨 「真理」 同 「義德」。唔係「多人做嘅嘢」就係「真理」，就係啱嘅，反而係我哋要問自己，呢個行為係咪真係適合我哋而家嘅環境？咁做嘅話，會唔會傷害到人哋嘅感受、尊嚴，或者破壞彼此嘅關係？",
+                reply2_2: "我以前都有類似既經歷，見到網上生日惡搞好似好熱鬧，就跟住做，結果令朋友同屋企人好難受。而家先明白，「義德」其實很重要，即使面對潮流、面對「好似好好玩」嘅引誘，都要堅持做正確、尊重他人嘅事。",
+                comment2_2: "咁…我而家可以做啲咩嚟補救呀。",
+                reply2_3: "同學，道歉唔代表你輸咗，道歉係展現勇氣同承擔嘅行動，你要記住，做自己，亦要尊重他人，每部手機，每部電腦嘅背後都係一個個真實嘅人，佢地值得被尊重。網絡係可以得到快樂嘅地方，但真正嘅快樂係建立在互相尊重、真誠相處嘅基礎上㗎。"
+            };
+        }
+
+        // 初始化步骤列表
+        function initSteps() {
+            const texts = getTexts();
+            
+            // 步骤1：阿麒首发帖
+            steps.push(() => {
+                typeWriter(document.getElementById('mainPostText'), texts.mainPost, () => {});
+            });
+
+            // 步骤2：显示同学1第一次评论并打字
+            steps.push(() => {
+                showComment('comment1');
+                typeWriter(document.getElementById('comment1Text'), texts.comment1, () => {});
+            });
+
+            // 步骤3：显示阿麒第一次回复1并打字
+            steps.push(() => {
+                showComment('reply1_1');
+                typeWriter(document.getElementById('reply1_1Text'), texts.reply1_1, () => {});
+            });
+
+            // 步骤4：显示同学1第二次评论并打字
+            steps.push(() => {
+                showComment('comment1_2');
+                typeWriter(document.getElementById('comment1_2Text'), texts.comment1_2, () => {});
+            });
+
+            // 步骤5：显示阿麒第二次回复1并打字
+            steps.push(() => {
+                showComment('reply1_2');
+                typeWriter(document.getElementById('reply1_2Text'), texts.reply1_2, () => {});
+            });
+
+            // 步骤6：显示同学2评论并打字
+            steps.push(() => {
+                showComment('comment2');
+                typeWriter(document.getElementById('comment2Text'), texts.comment2, () => {});
+            });
+
+            // 步骤7：显示阿麒回复2-1并打前半段
+            steps.push(() => {
+                showComment('reply2_1');
+                typeWriter(document.getElementById('reply2_1Text'), texts.reply2_1_part1, () => {});
+            });
+
+            // 步骤8：续打阿麒回复2-1的后半段
+            steps.push(() => {
+                typeWriter(document.getElementById('reply2_1Text'), texts.reply2_1_full, () => {});
+            });
+
+            // 步骤9：显示阿麒回复2-2并打字
+            steps.push(() => {
+                showComment('reply2_2');
+                typeWriter(document.getElementById('reply2_2Text'), texts.reply2_2, () => {});
+            });
+
+            // 步骤10：显示同学2第二次评论并打字
+            steps.push(() => {
+                showComment('comment2_2');
+                typeWriter(document.getElementById('comment2_2Text'), texts.comment2_2, () => {});
+            });
+
+            // 步骤11：显示阿麒回复2-3并打字
+            steps.push(() => {
+                showComment('reply2_3');
+                typeWriter(document.getElementById('reply2_3Text'), texts.reply2_3, () => {});
+            });
+
+            // 步骤12：打公会宣言旧版本
+            steps.push(() => {
+                typeWriter(document.getElementById('manifestoText'), manifestoTextOld, () => {
+                    manifestoStep = 1;
+                });
+            });
+
+            // 步骤13：删除公会宣言旧版本
+            steps.push(() => {
+                deleteWriter(document.getElementById('manifestoText'), () => {
+                    manifestoStep = 2;
+                });
+            });
+
+            // 步骤14：打公会宣言新版本
+            steps.push(() => {
+                typeWriter(document.getElementById('manifestoText'), manifestoTextNew, () => {
+                    manifestoStep = 3;
+                });
+            });
+
+            // 步骤15：完成提示
+            steps.push(() => {
+                alert('所有內容已展示完畢！');
+            });
+        }
+
+        // 执行当前步骤并推进到下一步
+        function executeCurrentStep() {
+            if (currentStep < steps.length) {
+                steps[currentStep]();
+                currentStep++;
+            }
+        }
+    </script>
+</body>
+</html>
