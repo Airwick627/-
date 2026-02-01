@@ -15,7 +15,7 @@
             text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
         }
 
-        /* 科幻渐变背景 */
+        /* 科幻渐变背景 - 新增font-size: 1.5rem; 全局放大文字1.5倍 */
         body {
             background: linear-gradient(135deg, #0a0a1a, #12122b, #0f0f29);
             color: #e0f7ff;
@@ -23,6 +23,7 @@
             padding-bottom: 50px;
             background-attachment: fixed;
             overflow-x: hidden;
+            font-size: 1.5rem; /* 核心修改：全局文字放大1.5倍 */
         }
 
         /* 网格背景装饰 */
@@ -70,8 +71,10 @@
             padding: 40px;
             text-align: center;
             max-width: 500px;
-            /* 修复：将 neon-glow: true 改为 class 调用 */
-            class: "neon-glow";
+            /* 修复：直接应用霓虹发光效果 */
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 
+                        0 0 20px rgba(0, 255, 255, 0.3),
+                        inset 0 0 10px rgba(0, 255, 255, 0.2);
             position: relative;
             overflow: hidden;
         }
@@ -95,7 +98,7 @@
 
         .modal-content h2 {
             color: #00ffff;
-            font-size: 1.8rem;
+            font-size: 2.7rem; /* 原1.8rem * 1.5 = 2.7rem */
             margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -103,7 +106,7 @@
 
         .modal-content p {
             color: #b3e5fc;
-            font-size: 1.1rem;
+            font-size: 1.65rem; /* 原1.1rem * 1.5 = 1.65rem */
             margin-bottom: 30px;
             line-height: 1.6;
         }
@@ -116,7 +119,7 @@
             border-radius: 50px;
             font-weight: bold;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.5rem; /* 原1rem * 1.5 = 1.5rem */
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -141,14 +144,14 @@
         }
 
         header h1 {
-            font-size: 2.2rem;
+            font-size: 3.3rem; /* 原2.2rem * 1.5 = 3.3rem */
             margin-bottom: 8px;
             letter-spacing: 3px;
             text-transform: uppercase;
         }
 
         header p {
-            font-size: 1rem;
+            font-size: 1.5rem; /* 原1rem * 1.5 = 1.5rem */
             opacity: 0.8;
             color: #80deea;
         }
@@ -167,7 +170,7 @@
             margin: 0 18px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.5rem; /* 原1rem * 1.5 = 1.5rem */
             transition: all 0.3s ease;
             padding: 8px 15px;
             border-radius: 50px;
@@ -209,7 +212,7 @@
             margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 1px solid rgba(0, 255, 255, 0.3);
-            font-size: 1.6rem;
+            font-size: 2.4rem; /* 原1.6rem * 1.5 = 2.4rem */
             letter-spacing: 1px;
         }
 
@@ -232,12 +235,12 @@
 
         .author-info h3 {
             color: #00ffff;
-            font-size: 1.3rem;
+            font-size: 1.95rem; /* 原1.3rem * 1.5 = 1.95rem */
         }
 
         .author-info p {
             color: #80deea;
-            font-size: 0.9rem;
+            font-size: 1.35rem; /* 原0.9rem * 1.5 = 1.35rem */
             opacity: 0.8;
         }
 
@@ -253,14 +256,14 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1rem;
+            font-size: 1.5rem; /* 原1rem * 1.5 = 1.5rem */
         }
 
         /* 打字效果容器 - 科幻终端风格 */
         .typewriter-container {
             position: relative;
-            min-height: 80px;
-            font-size: 1.1rem;
+            min-height: 120px; /* 适配文字放大，提高最小高度 */
+            font-size: 1.65rem; /* 原1.1rem * 1.5 = 1.65rem */
             line-height: 1.8;
             margin-bottom: 20px;
             padding: 15px;
@@ -325,7 +328,7 @@
 
         .comment-author h4 {
             color: #00ffff;
-            font-size: 1.1rem;
+            font-size: 1.65rem; /* 原1.1rem * 1.5 = 1.65rem */
         }
 
         /* 成員展示（僅3人：阿麒+同學1+同學2） */
@@ -364,7 +367,7 @@
         }
 
         .member .role {
-            font-size: 0.8rem;
+            font-size: 1.2rem; /* 原0.8rem * 1.5 = 1.2rem */
             color: #00ffff;
             opacity: 0.8;
         }
@@ -372,8 +375,8 @@
         /* 公會宣言區域 */
         .manifesto-container {
             position: relative;
-            min-height: 180px;
-            font-size: 1.2rem;
+            min-height: 270px; /* 适配文字放大，提高最小高度 */
+            font-size: 1.8rem; /* 原1.2rem * 1.5 = 1.8rem */
             line-height: 2.2;
             font-weight: 500;
             margin: 20px 0;
@@ -393,7 +396,7 @@
             text-decoration: none;
             font-weight: bold;
             margin-top: 15px;
-            font-size: 1rem;
+            font-size: 1.5rem; /* 原1rem * 1.5 = 1.5rem */
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -425,30 +428,63 @@
             left: -20px;
         }
 
-        /* 新增：提示按键的样式 */
-        .key-hint {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(10, 10, 40, 0.8);
-            border: 1px solid #00ffff;
-            border-radius: 10px;
-            padding: 10px 15px;
-            color: #b3e5fc;
-            font-size: 0.9rem;
-            z-index: 999;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-        }
-
         /* 新增：版權區域样式 */
         .copyright {
             background: #00dddd; 
             color: #0a0a1a;
             text-align: center;
             padding: 10px 0;
-            font-size: 1rem;
+            font-size: 1.5rem; /* 原1rem * 1.5 = 1.5rem */
             margin-top: 20px;
             width: 100%;
+        }
+
+        /* 音效状态提示 */
+        .sound-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(10, 10, 40, 0.8);
+            border: 1px solid #00ffff;
+            border-radius: 50px;
+            padding: 8px 15px;
+            color: #b3e5fc;
+            font-size: 1.2rem;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .sound-status.muted {
+            border-color: #ff5555;
+        }
+
+        .sound-icon {
+            font-size: 1.5rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 0.7;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 0.7;
+            }
+            to {
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -460,6 +496,12 @@
             <p>本公會目前無其他成員，你已自動晉升為「良性遊玩互助團」團長！</p>
             <button class="modal-btn" id="modalConfirmBtn">確認</button>
         </div>
+    </div>
+
+    <!-- 音效状态提示 -->
+    <div class="sound-status" id="soundStatus" style="display: none;">
+        <span class="sound-icon">🔊</span>
+        <span>音效開啟</span>
     </div>
 
     <!-- 頂部標題+導航 -->
@@ -542,7 +584,7 @@
 
             <!-- 回帖區域 -->
             <div style="margin-top: 30px;">
-                <h3 style="color: #00ffff; margin-bottom: 20px; font-size: 1.3rem; letter-spacing: 1px;">回帖討論</h3>
+                <h3 style="color: #00ffff; margin-bottom: 20px; font-size: 1.95rem; letter-spacing: 1px;">回帖討論</h3> <!-- 原1.3rem * 1.5 = 1.95rem -->
                 
                 <!-- 同學1第一次回帖 -->
                 <div class="comment-item" id="comment1">
@@ -609,9 +651,6 @@
                         <div class="typewriter-text" id="reply2_1Text"></div>
                     </div>
                 </div>
-                
-                <!-- 新增：阿麒第一次回覆同學2（後半段）- 单独步骤 -->
-                <div id="reply2_1_continue" style="display:none;"></div>
 
                 <!-- 阿麒第二次回覆同學2（後半段） -->
                 <div class="comment-item" id="reply2_2">
@@ -671,19 +710,27 @@
         良性遊玩互助團 © 2026版權所有 | 高三丙 方樹澧  高三乙 林君濠 | 部落聯繫：2831 5484
     </div>
 
-    <!-- 按键提示 - 改为繁体 -->
-    <div class="key-hint">
-        🎹 按 <strong>→</strong> 推進對話 | 長按→ 快速顯示全部
-    </div>
+    <!-- HTML5 Audio元素 - 使用您提供的音效链接 -->
+    <audio id="typewriterSound" preload="auto" src="https://flat-coral-ahqjnwihpc.edgeone.app/%E6%89%93%E5%AD%97%E9%9F%B3%E6%95%88.mp3"></audio>
+    <audio id="messageSound" preload="auto" src="https://protective-aqua-36fvyxrh5m.edgeone.app/%E8%A8%8A%E6%81%AF%E6%8F%90%E7%A4%BA%E9%9F%B3.mp3"></audio>
+    <audio id="deleteSound" preload="auto" src="https://well-sapphire-xzxdqrvwsq.edgeone.app/%E5%88%AA%E9%99%A4%E9%9F%B3%E6%95%88.mp3"></audio>
 
     <script>
         // 全局變量：是否快進（长按右箭頭觸發）
         let isFastForward = false;
         let fastForwardTimer = null;
-        // 打字速度调整为100毫秒/字
-        const typeSpeed = 100;
+        // 打字速度调整为200毫秒/字
+        const typeSpeed = 200;
+        // 删除速度调整为100毫秒/字（比打字快50%）
+        const deleteSpeed = 100;
         // 快進模式下直接跳過所有延遲
         const getCurrentSpeed = () => isFastForward ? 0 : typeSpeed;
+        const getDeleteSpeed = () => isFastForward ? 0 : deleteSpeed;
+        
+        // 当前正在播放的音效
+        let currentSoundInterval = null;
+        let currentSoundElement = null;
+        let currentSoundSpeed = typeSpeed;
         
         // 公会宣言相关状态
         let manifestoStep = 0; // 0:未开始 1:旧版打字完成 2:删除完成 3:新版打字完成
@@ -697,13 +744,161 @@
         // 定义所有步骤的执行函数
         const steps = [];
 
-        // 显示评论的辅助函数
+        // 音效控制
+        let soundEnabled = true;
+        const soundStatus = document.getElementById('soundStatus');
+        const typewriterSound = document.getElementById('typewriterSound');
+        const messageSound = document.getElementById('messageSound');
+        const deleteSound = document.getElementById('deleteSound');
+
+        // 初始化音频设置
+        function initAudio() {
+            // 设置音频音量
+            typewriterSound.volume = 0.7;  // 打字音效音量
+            messageSound.volume = 0.8;     // 消息提示音效音量
+            deleteSound.volume = 0.6;      // 删除音效音量
+            
+            // 预加载音频
+            typewriterSound.load();
+            messageSound.load();
+            deleteSound.load();
+            
+            // 监听音频加载完成
+            typewriterSound.addEventListener('canplaythrough', () => {
+                console.log('打字音效加载完成');
+            });
+            messageSound.addEventListener('canplaythrough', () => {
+                console.log('消息提示音效加载完成');
+            });
+            deleteSound.addEventListener('canplaythrough', () => {
+                console.log('删除音效加载完成');
+            });
+        }
+
+        // 停止当前播放的音效
+        function stopCurrentSound() {
+            if (currentSoundInterval) {
+                clearInterval(currentSoundInterval);
+                currentSoundInterval = null;
+            }
+            if (currentSoundElement && !currentSoundElement.paused) {
+                currentSoundElement.pause();
+                currentSoundElement.currentTime = 0;
+                currentSoundElement = null;
+            }
+        }
+
+        // 播放音效的辅助函数
+        function playSound(soundElement, soundSpeed = typeSpeed, loop = false) {
+            if (soundEnabled && !isFastForward) {
+                try {
+                    // 停止当前正在播放的音效
+                    stopCurrentSound();
+                    
+                    // 设置当前音效元素
+                    currentSoundElement = soundElement;
+                    currentSoundSpeed = soundSpeed;
+                    
+                    // 播放音效
+                    currentSoundElement.currentTime = 0;
+                    currentSoundElement.play().catch(e => {
+                        console.log("音频播放失败:", e);
+                    });
+                    
+                    // 如果需要循环播放
+                    if (loop) {
+                        // 根据速度调整音效播放频率
+                        let playInterval;
+                        if (soundElement === deleteSound) {
+                            // 删除音效：每删除2个字符播放一次（速度更快）
+                            playInterval = soundSpeed * 2;
+                        } else {
+                            // 打字音效：每3个字符播放一次
+                            playInterval = soundSpeed * 3;
+                        }
+                        
+                        currentSoundInterval = setInterval(() => {
+                            if (soundEnabled && !isFastForward && currentSoundElement) {
+                                currentSoundElement.currentTime = 0;
+                                currentSoundElement.play().catch(e => {
+                                    console.log("音频循环播放失败:", e);
+                                });
+                            } else {
+                                stopCurrentSound();
+                            }
+                        }, playInterval);
+                    }
+                    
+                } catch (e) {
+                    console.log("音频播放错误:", e);
+                }
+            }
+        }
+
+        // 播放一次消息提示音（不循环）
+        function playMessageSound() {
+            if (soundEnabled && !isFastForward) {
+                // 停止当前音效
+                stopCurrentSound();
+                
+                try {
+                    // 克隆音频元素以避免重复播放问题
+                    const clone = messageSound.cloneNode();
+                    clone.volume = messageSound.volume;
+                    clone.play().catch(e => {
+                        // 如果克隆播放失败，尝试直接播放原音频
+                        if (messageSound.paused) {
+                            messageSound.currentTime = 0;
+                            messageSound.play().catch(e2 => console.log("消息提示音播放失败:", e2));
+                        }
+                    });
+                } catch (e) {
+                    console.log("消息提示音播放错误:", e);
+                }
+            }
+        }
+
+        // 显示音效状态提示
+        function showSoundStatus(message, icon) {
+            soundStatus.querySelector('.sound-icon').textContent = icon;
+            soundStatus.querySelector('span:last-child').textContent = message;
+            soundStatus.style.display = 'flex';
+            soundStatus.style.opacity = '1';
+            soundStatus.style.animation = 'fadeIn 0.5s ease';
+            
+            // 2秒后渐隐
+            setTimeout(() => {
+                soundStatus.style.animation = 'fadeOut 1s ease';
+                setTimeout(() => {
+                    soundStatus.style.display = 'none';
+                }, 1000);
+            }, 2000);
+        }
+
+        // M键切换静音
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'm' || e.key === 'M') {
+                soundEnabled = !soundEnabled;
+                if (soundEnabled) {
+                    soundStatus.classList.remove('muted');
+                    showSoundStatus('音效開啟', '🔊');
+                } else {
+                    soundStatus.classList.add('muted');
+                    showSoundStatus('音效靜音', '🔇');
+                    stopCurrentSound(); // 静音时停止所有音效
+                }
+            }
+        });
+
+        // 显示评论的辅助函数 - 每条新消息播放提示音
         function showComment(commentId) {
             const comment = document.getElementById(commentId);
             if (comment) {
                 comment.classList.add('show');
                 // 显示后自动滚动到该评论
                 comment.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                // 播放消息提示音效 - 每条新消息都有
+                playMessageSound();
             }
         }
 
@@ -715,6 +910,7 @@
             // 彈窗關閉後，初始化步骤和动画
             initSteps();
             initDataCounter();
+            initAudio(); // 初始化音频
             // 执行第一步：阿麒首发帖
             executeCurrentStep();
         });
@@ -727,6 +923,8 @@
                 if (!fastForwardTimer) {
                     fastForwardTimer = setTimeout(() => {
                         isFastForward = true;
+                        // 快进时停止所有音效
+                        stopCurrentSound();
                         // 快进时显示所有评论
                         document.querySelectorAll('.comment-item').forEach(item => {
                             item.classList.add('show');
@@ -742,7 +940,7 @@
                         document.getElementById('comment1_2Text').textContent = texts.comment1_2;
                         document.getElementById('reply1_2Text').textContent = texts.reply1_2;
                         document.getElementById('comment2Text').textContent = texts.comment2;
-                        document.getElementById('reply2_1Text').textContent = texts.reply2_1_full;
+                        document.getElementById('reply2_1Text').textContent = texts.reply2_1_part1 + texts.reply2_1_part2;
                         document.getElementById('reply2_2Text').textContent = texts.reply2_2;
                         document.getElementById('comment2_2Text').textContent = texts.comment2_2;
                         document.getElementById('reply2_3Text').textContent = texts.reply2_3;
@@ -766,8 +964,8 @@
             }
         });
 
-        // 3. 打字效果函數
-        function typeWriter(element, text, callback = () => {}) {
+        // 3. 打字效果函數 - 打字结束时停止音效
+        function typeWriter(element, text, callback = () => {}, speed = getCurrentSpeed()) {
             let index = 0;
             // 如果是续打，保留已有内容
             if (element.textContent.length > 0 && text.startsWith(element.textContent)) {
@@ -779,6 +977,9 @@
             // 清除之前的定時器，防止衝突
             clearInterval(element.typeTimer);
             
+            // 开始播放打字音效，速度与打字速度同步（循环播放）
+            playSound(typewriterSound, speed, true);
+            
             element.typeTimer = setInterval(() => {
                 if (index < text.length && !isFastForward) {
                     element.textContent += text.charAt(index);
@@ -786,17 +987,25 @@
                 } else if (isFastForward) {
                     element.textContent = text;
                     clearInterval(element.typeTimer);
+                    // 打字结束时停止音效
+                    stopCurrentSound();
                     callback();
                 } else {
                     clearInterval(element.typeTimer);
+                    // 打字结束时停止音效
+                    stopCurrentSound();
                     callback();
                 }
-            }, getCurrentSpeed());
+            }, speed);
         }
 
-        // 4. 刪除效果函數
+        // 4. 刪除效果函數 - 删除结束时停止音效
         function deleteWriter(element, callback = () => {}) {
             let text = element.textContent;
+            const speed = getDeleteSpeed();
+            
+            // 开始播放删除音效，速度与删除速度同步（循环播放）
+            playSound(deleteSound, speed, true);
             
             const timer = setInterval(() => {
                 if (text.length > 0 && !isFastForward) {
@@ -805,12 +1014,16 @@
                 } else if (isFastForward) {
                     element.textContent = '';
                     clearInterval(timer);
+                    // 删除结束时停止音效
+                    stopCurrentSound();
                     callback();
                 } else {
                     clearInterval(timer);
+                    // 删除结束时停止音效
+                    stopCurrentSound();
                     callback();
                 }
-            }, getCurrentSpeed() / 2);
+            }, speed);
         }
 
         // 5. 瀏覽量/點贊數上升效果
@@ -845,15 +1058,13 @@
             return {
                 mainPost: "大家好，我係新成員阿麒。我前幾排因為沉迷網絡，破壞哂同朋友、家人嘅關係，成績都一塌糊塗……但係而家我明白咗，網絡佢其實只係工具，真正重要嘅係我哋點樣善用網絡。",
                 comment1: "我同你情況好似。我阿媽成日話我打機打到成個廢人咁，我唔知點同佢溝通……我連解釋嘅機會都冇。",
-                reply1_1: "我有個朋友時不時都會搵埋佢爸爸一齊出街玩，同食飯，不如你都試吓邀請你阿媽一齊去做吓啲除咗打機之外嘅嘢？，或者同佢分享吓你玩緊嘅遊戲。有時家長唔明，係因為我哋冇俾機會佢哋了解我哋。主動同家人溝通，佢哋就會了解你多啲。",
+                reply1_1: "我有個朋友時不時都會搵埋佢爸爸一齊出街玩，同食飯，不如你都試吓邀請你阿媽一齊去做吓啲除咗打機之外嘅嘢？或者同佢分享吓你玩緊嘅遊戲。有時家長唔明，係因為我哋冇俾機會佢哋了解我哋。主動同家人溝通，佢哋就會了解你多啲。",
                 comment1_2: "真係得咩？",
                 reply1_2: "我都曾經覺得網絡世界就係一切。但係，真實嘅生活同陪伴係無可替代㗎。試吓將打機嘅時間分一部分出嚟，去了解身邊嘅家人同朋友。遊戲可以係放鬆，但唔應該成為逃避現實嘅工具。",
                 comment2: "我之前成日上網睇短片，見到人哋做咩我就做咩，之後我的朋友就同我反晒面。我唔知點算好，明明見網上Ｄ人玩得咁開心，都唔明點解佢哋要同我反面囉！",
-                // 拆分前半段和后半段
+                // 拆分前半段和后半段，在中间添加停顿
                 reply2_1_part1: "我好明白你嘅感受。網絡短片的確好吸引人，好似人人都玩得好開心，好容易令人覺得「跟住做就係啱嘅！」",
                 reply2_1_part2: "但係每當呢個時候，我哋就需要學習分辨 「真理」 同 「義德」。唔係「多人做嘅嘢」就係「真理」，就係啱嘅，反而係我哋要問自己，呢個行為係咪真係適合我哋而家嘅環境？咁做嘅話，會唔會傷害到人哋嘅感受、尊嚴，或者破壞彼此嘅關係？",
-                // 完整内容
-                reply2_1_full: "我好明白你嘅感受。網絡短片的確好吸引人，好似人人都玩得好開心，好容易令人覺得「跟住做就係啱嘅！」但係每當呢個時候，我哋就需要學習分辨 「真理」 同 「義德」。唔係「多人做嘅嘢」就係「真理」，就係啱嘅，反而係我哋要問自己，呢個行為係咪真係適合我哋而家嘅環境？咁做嘅話，會唔會傷害到人哋嘅感受、尊嚴，或者破壞彼此嘅關係？",
                 reply2_2: "我以前都有類似既經歷，見到網上生日惡搞好似好熱鬧，就跟住做，結果令朋友同屋企人好難受。而家先明白，「義德」其實很重要，即使面對潮流、面對「好似好好玩」嘅引誘，都要堅持做正確、尊重他人嘅事。",
                 comment2_2: "咁…我而家可以做啲咩嚟補救呀。",
                 reply2_3: "同學，道歉唔代表你輸咗，道歉係展現勇氣同承擔嘅行動，你要記住，做自己，亦要尊重他人，每部手機，每部電腦嘅背後都係一個個真實嘅人，佢地值得被尊重。網絡係可以得到快樂嘅地方，但真正嘅快樂係建立在互相尊重、真誠相處嘅基礎上㗎。"
@@ -899,15 +1110,18 @@
                 typeWriter(document.getElementById('comment2Text'), texts.comment2, () => {});
             });
 
-            // 步骤7：显示阿麒回复2-1并打前半段
+            // 步骤7：显示阿麒回复2-1前半段并打字
             steps.push(() => {
                 showComment('reply2_1');
-                typeWriter(document.getElementById('reply2_1Text'), texts.reply2_1_part1, () => {});
+                typeWriter(document.getElementById('reply2_1Text'), texts.reply2_1_part1, () => {
+                    // 前半段打字完成后，等待用户按右方向键继续
+                });
             });
 
-            // 步骤8：续打阿麒回复2-1的后半段
+            // 步骤8：显示阿麒回复2-1后半段并打字
             steps.push(() => {
-                typeWriter(document.getElementById('reply2_1Text'), texts.reply2_1_full, () => {});
+                // 这里不调用showComment，因为这是同一条消息的后半部分
+                typeWriter(document.getElementById('reply2_1Text'), texts.reply2_1_part1 + texts.reply2_1_part2, () => {});
             });
 
             // 步骤9：显示阿麒回复2-2并打字
