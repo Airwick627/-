@@ -277,6 +277,24 @@
             color: #b3e5fc;
         }
 
+        /* 直接顯示文字的容器（同學一、同學二用） */
+        .static-text-container {
+            position: relative;
+            min-height: 120px;
+            font-size: 1.65rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(0, 10, 30, 0.4);
+            border-left: 3px solid #0088cc;
+        }
+
+        .static-text {
+            white-space: pre-line;
+            color: #b3e5fc;
+        }
+
         /* 回帖區域 - 默认隐藏所有评论，通过JS动态显示 */
         .comment-item {
             background: rgba(20, 20, 50, 0.5);
@@ -586,18 +604,18 @@
             <div style="margin-top: 30px;">
                 <h3 style="color: #00ffff; margin-bottom: 20px; font-size: 1.95rem; letter-spacing: 1px;">回帖討論</h3> <!-- 原1.3rem * 1.5 = 1.95rem -->
                 
-                <!-- 同學1第一次回帖 -->
+                <!-- 同學1第一次回帖（改為直接顯示） -->
                 <div class="comment-item" id="comment1">
                     <div class="comment-author">
                         <img src="https://img2.woyaogexing.com/2020/02/25/08c91bf78a4c45758b2565e7cc7807b5!400x400.jpeg" alt="同學1頭像" class="comment-avatar">
                         <h4>同學1</h4>
                     </div>
-                    <div class="typewriter-container">
-                        <div class="typewriter-text" id="comment1Text"></div>
+                    <div class="static-text-container">
+                        <div class="static-text" id="comment1Text"></div>
                     </div>
                 </div>
 
-                <!-- 阿麒第一次回覆同學1 -->
+                <!-- 阿麒第一次回覆同學1（打字效果） -->
                 <div class="comment-item" id="reply1_1">
                     <div class="comment-author">
                         <img src="https://img2.woyaogexing.com/2020/02/25/1d5f64c3b76c4e02bce7e35fd6bac51c!400x400.jpeg" alt="阿麒頭像" class="comment-avatar">
@@ -608,18 +626,18 @@
                     </div>
                 </div>
 
-                <!-- 同學1第二次回帖（真係得咩？） -->
+                <!-- 同學1第二次回帖（直接顯示） -->
                 <div class="comment-item" id="comment1_2">
                     <div class="comment-author">
                         <img src="https://img2.woyaogexing.com/2020/02/25/08c91bf78a4c45758b2565e7cc7807b5!400x400.jpeg" alt="同學1頭像" class="comment-avatar">
                         <h4>同學1</h4>
                     </div>
-                    <div class="typewriter-container">
-                        <div class="typewriter-text" id="comment1_2Text"></div>
+                    <div class="static-text-container">
+                        <div class="static-text" id="comment1_2Text"></div>
                     </div>
                 </div>
 
-                <!-- 阿麒第二次回覆同學1 -->
+                <!-- 阿麒第二次回覆同學1（打字效果） -->
                 <div class="comment-item" id="reply1_2">
                     <div class="comment-author">
                         <img src="https://img2.woyaogexing.com/2020/02/25/1d5f64c3b76c4e02bce7e35fd6bac51c!400x400.jpeg" alt="阿麒頭像" class="comment-avatar">
@@ -630,18 +648,18 @@
                     </div>
                 </div>
 
-                <!-- 同學2回帖 -->
+                <!-- 同學2回帖（直接顯示） -->
                 <div class="comment-item" id="comment2">
                     <div class="comment-author">
                         <img src="https://img2.woyaogexing.com/2020/02/25/015c2c7d4c4d4afc8e72e5adb4ae973f!400x400.jpeg" alt="同學2頭像" class="comment-avatar">
                         <h4>同學2</h4>
                     </div>
-                    <div class="typewriter-container">
-                        <div class="typewriter-text" id="comment2Text"></div>
+                    <div class="static-text-container">
+                        <div class="static-text" id="comment2Text"></div>
                     </div>
                 </div>
 
-                <!-- 阿麒第一次回覆同學2（前半段） -->
+                <!-- 阿麒第一次回覆同學2（前半段 - 打字效果） -->
                 <div class="comment-item" id="reply2_1">
                     <div class="comment-author">
                         <img src="https://img2.woyaogexing.com/2020/02/25/1d5f64c3b76c4e02bce7e35fd6bac51c!400x400.jpeg" alt="阿麒頭像" class="comment-avatar">
@@ -652,7 +670,7 @@
                     </div>
                 </div>
 
-                <!-- 阿麒第二次回覆同學2（後半段） -->
+                <!-- 阿麒第二次回覆同學2（後半段 - 打字效果） -->
                 <div class="comment-item" id="reply2_2">
                     <div class="comment-author">
                         <img src="https://img2.woyaogexing.com/2020/02/25/1d5f64c3b76c4e02bce7e35fd6bac51c!400x400.jpeg" alt="阿麒頭像" class="comment-avatar">
@@ -663,18 +681,18 @@
                     </div>
                 </div>
 
-                <!-- 同學2第二次回帖 -->
+                <!-- 同學2第二次回帖（直接顯示） -->
                 <div class="comment-item" id="comment2_2">
                     <div class="comment-author">
                         <img src="https://img2.woyaogexing.com/2020/02/25/015c2c7d4c4d4afc8e72e5adb4ae973f!400x400.jpeg" alt="同學2頭像" class="comment-avatar">
                         <h4>同學2</h4>
                     </div>
-                    <div class="typewriter-container">
-                        <div class="typewriter-text" id="comment2_2Text"></div>
+                    <div class="static-text-container">
+                        <div class="static-text" id="comment2_2Text"></div>
                     </div>
                 </div>
 
-                <!-- 阿麒第三次回覆同學2 -->
+                <!-- 阿麒第三次回覆同學2（打字效果） -->
                 <div class="comment-item" id="reply2_3">
                     <div class="comment-author">
                         <img src="https://img2.woyaogexing.com/2020/02/25/1d5f64c3b76c4e02bce7e35fd6bac51c!400x400.jpeg" alt="阿麒頭像" class="comment-avatar">
@@ -711,7 +729,7 @@
     </div>
 
     <!-- HTML5 Audio元素 - 使用您提供的音效链接 -->
-    <audio id="typewriterSound" preload="auto" src="https://flat-coral-ahqjnwihpc.edgeone.app/%E6%89%93%E5%AD%97%E9%9F%B3%E6%95%88.mp3"></audio>
+    <audio id="typewriterSound" preload="auto" src="https://cdn.pixabay.com/download/audio/2025/01/21/audio_360fe8370d.mp3?filename=computer-keyboard-typing-290582.mp3"></audio>
     <audio id="messageSound" preload="auto" src="https://protective-aqua-36fvyxrh5m.edgeone.app/%E8%A8%8A%E6%81%AF%E6%8F%90%E7%A4%BA%E9%9F%B3.mp3"></audio>
     <audio id="deleteSound" preload="auto" src="https://well-sapphire-xzxdqrvwsq.edgeone.app/%E5%88%AA%E9%99%A4%E9%9F%B3%E6%95%88.mp3"></audio>
 
@@ -775,82 +793,103 @@
             });
         }
 
+        // 播放打字音效（重複播放直到打字完成）
+        function playTypingSoundUntilStopped(speed = typeSpeed) {
+            if (!soundEnabled || isFastForward) return;
+            
+            // 清除之前的定时器
+            if (currentSoundInterval) {
+                clearInterval(currentSoundInterval);
+            }
+            
+            // 立即播放一次
+            try {
+                typewriterSound.currentTime = 0;
+                typewriterSound.play().catch(e => {
+                    console.log("打字音效播放失败:", e);
+                });
+                
+                // 设置循环播放（根据音效长度调整间隔）
+                const soundDuration = 2.0; // 音效大约时长（秒）
+                const charsPerPlay = Math.max(3, Math.floor(soundDuration * 1000 / speed));
+                const playInterval = speed * charsPerPlay;
+                
+                currentSoundInterval = setInterval(() => {
+                    if (soundEnabled && !isFastForward) {
+                        typewriterSound.currentTime = 0;
+                        typewriterSound.play().catch(e => {
+                            console.log("打字音效循环播放失败:", e);
+                        });
+                    } else {
+                        stopCurrentSound();
+                    }
+                }, playInterval);
+                
+            } catch (e) {
+                console.log("打字音效播放错误:", e);
+            }
+        }
+
+        // 播放删除音效（重複播放直到删除完成）
+        function playDeleteSoundUntilStopped(speed = deleteSpeed) {
+            if (!soundEnabled || isFastForward) return;
+            
+            // 清除之前的定时器
+            if (currentSoundInterval) {
+                clearInterval(currentSoundInterval);
+            }
+            
+            // 立即播放一次
+            try {
+                deleteSound.currentTime = 0;
+                deleteSound.play().catch(e => {
+                    console.log("删除音效播放失败:", e);
+                });
+                
+                // 设置循环播放（删除音效播放更频繁）
+                const soundDuration = 1.0; // 删除音效较短
+                const charsPerPlay = Math.max(2, Math.floor(soundDuration * 1000 / speed));
+                const playInterval = speed * charsPerPlay;
+                
+                currentSoundInterval = setInterval(() => {
+                    if (soundEnabled && !isFastForward) {
+                        deleteSound.currentTime = 0;
+                        deleteSound.play().catch(e => {
+                            console.log("删除音效循环播放失败:", e);
+                        });
+                    } else {
+                        stopCurrentSound();
+                    }
+                }, playInterval);
+                
+            } catch (e) {
+                console.log("删除音效播放错误:", e);
+            }
+        }
+
         // 停止当前播放的音效
         function stopCurrentSound() {
             if (currentSoundInterval) {
                 clearInterval(currentSoundInterval);
                 currentSoundInterval = null;
             }
-            if (currentSoundElement && !currentSoundElement.paused) {
-                currentSoundElement.pause();
-                currentSoundElement.currentTime = 0;
-                currentSoundElement = null;
+            if (typewriterSound && !typewriterSound.paused) {
+                typewriterSound.pause();
+                typewriterSound.currentTime = 0;
             }
-        }
-
-        // 播放音效的辅助函数
-        function playSound(soundElement, soundSpeed = typeSpeed, loop = false) {
-            if (soundEnabled && !isFastForward) {
-                try {
-                    // 停止当前正在播放的音效
-                    stopCurrentSound();
-                    
-                    // 设置当前音效元素
-                    currentSoundElement = soundElement;
-                    currentSoundSpeed = soundSpeed;
-                    
-                    // 播放音效
-                    currentSoundElement.currentTime = 0;
-                    currentSoundElement.play().catch(e => {
-                        console.log("音频播放失败:", e);
-                    });
-                    
-                    // 如果需要循环播放
-                    if (loop) {
-                        // 根据速度调整音效播放频率
-                        let playInterval;
-                        if (soundElement === deleteSound) {
-                            // 删除音效：每删除2个字符播放一次（速度更快）
-                            playInterval = soundSpeed * 2;
-                        } else {
-                            // 打字音效：每3个字符播放一次
-                            playInterval = soundSpeed * 3;
-                        }
-                        
-                        currentSoundInterval = setInterval(() => {
-                            if (soundEnabled && !isFastForward && currentSoundElement) {
-                                currentSoundElement.currentTime = 0;
-                                currentSoundElement.play().catch(e => {
-                                    console.log("音频循环播放失败:", e);
-                                });
-                            } else {
-                                stopCurrentSound();
-                            }
-                        }, playInterval);
-                    }
-                    
-                } catch (e) {
-                    console.log("音频播放错误:", e);
-                }
+            if (deleteSound && !deleteSound.paused) {
+                deleteSound.pause();
+                deleteSound.currentTime = 0;
             }
         }
 
         // 播放一次消息提示音（不循环）
         function playMessageSound() {
             if (soundEnabled && !isFastForward) {
-                // 停止当前音效
-                stopCurrentSound();
-                
                 try {
-                    // 克隆音频元素以避免重复播放问题
-                    const clone = messageSound.cloneNode();
-                    clone.volume = messageSound.volume;
-                    clone.play().catch(e => {
-                        // 如果克隆播放失败，尝试直接播放原音频
-                        if (messageSound.paused) {
-                            messageSound.currentTime = 0;
-                            messageSound.play().catch(e2 => console.log("消息提示音播放失败:", e2));
-                        }
+                    messageSound.currentTime = 0;
+                    messageSound.play().catch(e => {
+                        console.log("消息提示音播放失败:", e);
                     });
                 } catch (e) {
                     console.log("消息提示音播放错误:", e);
@@ -964,7 +1003,7 @@
             }
         });
 
-        // 3. 打字效果函數 - 打字结束时停止音效
+        // 3. 打字效果函數 - 打字开始时播放音效，打字结束时停止音效
         function typeWriter(element, text, callback = () => {}, speed = getCurrentSpeed()) {
             let index = 0;
             // 如果是续打，保留已有内容
@@ -977,8 +1016,8 @@
             // 清除之前的定時器，防止衝突
             clearInterval(element.typeTimer);
             
-            // 开始播放打字音效，速度与打字速度同步（循环播放）
-            playSound(typewriterSound, speed, true);
+            // 开始播放打字音效（循环播放直到打字完成）
+            playTypingSoundUntilStopped(speed);
             
             element.typeTimer = setInterval(() => {
                 if (index < text.length && !isFastForward) {
@@ -999,13 +1038,13 @@
             }, speed);
         }
 
-        // 4. 刪除效果函數 - 删除结束时停止音效
+        // 4. 刪除效果函數 - 删除开始时播放音效，删除结束时停止音效
         function deleteWriter(element, callback = () => {}) {
             let text = element.textContent;
             const speed = getDeleteSpeed();
             
-            // 开始播放删除音效，速度与删除速度同步（循环播放）
-            playSound(deleteSound, speed, true);
+            // 开始播放删除音效（循环播放直到删除完成）
+            playDeleteSoundUntilStopped(speed);
             
             const timer = setInterval(() => {
                 if (text.length > 0 && !isFastForward) {
@@ -1080,10 +1119,10 @@
                 typeWriter(document.getElementById('mainPostText'), texts.mainPost, () => {});
             });
 
-            // 步骤2：显示同学1第一次评论并打字
+            // 步骤2：显示同学1第一次评论并直接显示文字
             steps.push(() => {
                 showComment('comment1');
-                typeWriter(document.getElementById('comment1Text'), texts.comment1, () => {});
+                document.getElementById('comment1Text').textContent = texts.comment1;
             });
 
             // 步骤3：显示阿麒第一次回复1并打字
@@ -1092,10 +1131,10 @@
                 typeWriter(document.getElementById('reply1_1Text'), texts.reply1_1, () => {});
             });
 
-            // 步骤4：显示同学1第二次评论并打字
+            // 步骤4：显示同学1第二次评论并直接显示文字
             steps.push(() => {
                 showComment('comment1_2');
-                typeWriter(document.getElementById('comment1_2Text'), texts.comment1_2, () => {});
+                document.getElementById('comment1_2Text').textContent = texts.comment1_2;
             });
 
             // 步骤5：显示阿麒第二次回复1并打字
@@ -1104,10 +1143,10 @@
                 typeWriter(document.getElementById('reply1_2Text'), texts.reply1_2, () => {});
             });
 
-            // 步骤6：显示同学2评论并打字
+            // 步骤6：显示同学2评论并直接显示文字
             steps.push(() => {
                 showComment('comment2');
-                typeWriter(document.getElementById('comment2Text'), texts.comment2, () => {});
+                document.getElementById('comment2Text').textContent = texts.comment2;
             });
 
             // 步骤7：显示阿麒回复2-1前半段并打字
@@ -1130,10 +1169,10 @@
                 typeWriter(document.getElementById('reply2_2Text'), texts.reply2_2, () => {});
             });
 
-            // 步骤10：显示同学2第二次评论并打字
+            // 步骤10：显示同学2第二次评论并直接显示文字
             steps.push(() => {
                 showComment('comment2_2');
-                typeWriter(document.getElementById('comment2_2Text'), texts.comment2_2, () => {});
+                document.getElementById('comment2_2Text').textContent = texts.comment2_2;
             });
 
             // 步骤11：显示阿麒回复2-3并打字
